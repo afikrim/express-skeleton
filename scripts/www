@@ -1,0 +1,77 @@
+const http = require('http')
+
+require('dotenv').config()
+const app = require('../app.js')
+
+/*
+ * Create an http server
+ */
+const server = http.createServer(app)
+
+/*
+ * Function to normalize a port
+ */
+const normalizePort = val => {
+  const port = parseInt(val, 10)
+
+  // If it was a pipe
+  if (isNaN(port)) {
+    return val
+  }
+
+  // If port is valid
+  if (port >= 0) {
+    return port
+  }
+
+  // default return
+  return false
+}
+
+const port = normalizePort(process.env.PORT || '3000')
+
+/*
+ * Function to handle that server successfully created
+ */
+const onListening = () => {
+  const addr = server.address()
+  const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`
+
+  console.log(`Listening on ${bind}`)
+}
+
+/*
+ * Function to handle error
+ */
+const onError = error => {
+  if (error.syscall !== 'listen') {
+    throw error
+  }
+
+  const bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`
+
+  switch (error.code) {
+    // if error becaouse of permission
+    case 'EACCESS':
+      console.error(`${bind} requires elevated privileges`)
+      process.exit(1)
+      break
+    // if error because port already in use
+    case 'EADDRINUSE':
+      console.error(`${bind} is already in use`)
+      process.exit(1)
+      break
+    default:
+      throw error
+  }
+}
+
+// Set port to your application
+app.set('port', port)
+
+// Set server to listen to a port
+server.listen(port)
+
+// Check server status
+server.on('listening', onListening)
+server.on('error', onError)

@@ -1,0 +1,33 @@
+{
+  "name": "express-skeleton",
+  "version": "1.0.0",
+  "description": "BoilerPlate for express microservices with sql database",
+  "main": "app.js",
+  "scripts": {
+    "dev": "pm2-runtime start ./config/pm2.config.js"
+  },
+  "repository": "https://github.com/afikrim/sql-express-skeleton.git",
+  "author": "afikrim",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^3.21.3",
+    "mariadb": "^2.2.0",
+    "morgan": "^1.9.1",
+    "pm2": "^4.2.3",
+    "sequelize": "^5.21.5",
+    "sequelize-cli": "^5.5.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^1.19.1"
+  }
+}
